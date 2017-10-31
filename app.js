@@ -113,9 +113,11 @@ function handleResults(evt) {
     return;
   }
 
-  response.items.map((repositorie, index) => {
+  response.items.map(function(repositorie, index) {
+
     var repositorieElem = createListElement(repositorie, index);
-    searchResults.appendChild(repositorieElem);
+    return searchResults.appendChild(repositorieElem);
+
   })
 }
 
