@@ -16,8 +16,16 @@ input.onkeyup = function(e) {
   search();
 }
 
+input.onkeydown = function(e) {
+
+  if (e.keyCode === 40) {
+    document.getElementById(0).focus();
+    searchResults.focus();
+  }
+}
 // Enable going through the search results from your keyboard
 searchResults.onkeydown = function(e) {
+
   var tabIndex = document.activeElement.tabIndex;
   if (e.keyCode == 40 && document.activeElement.nextSibling) {
     document.activeElement.nextSibling.focus()
@@ -126,6 +134,7 @@ function createListElement(data, index) {
   var listElement = document.createElement('li');
   listElement.className = "listElement";
   listElement.tabIndex = index;
+  listElement.id = index;
   listElement.appendChild(document.createTextNode(data.name));
 
   listElement.addEventListener('click', function() {
