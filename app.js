@@ -19,19 +19,24 @@ input.onkeyup = function(e) {
 input.onkeydown = function(e) {
 
   if (e.keyCode === 40) {
-    document.getElementById(0).focus();
-    searchResults.focus();
+    searchResults.firstChild.focus();
+  } else if (e.keyCode === 38) {
+    searchResults.lastChild.focus();
   }
 }
 // Enable going through the search results from your keyboard
 searchResults.onkeydown = function(e) {
 
   var tabIndex = document.activeElement.tabIndex;
-  if (e.keyCode == 40 && document.activeElement.nextSibling) {
-    document.activeElement.nextSibling.focus()
+  if (e.keyCode == 38 && document.activeElement !== searchResults.firstChild) {
+    document.activeElement.previousSibling.focus();
+  } else if (e.keyCode === 38) {
+    searchResults.lastChild.focus();
   }
-  if (e.keyCode == 38 && document.activeElement.previousSibling) {
-    document.activeElement.previousSibling.focus()
+  if (e.keyCode == 40 && document.activeElement !== searchResults.lastChild) {
+    document.activeElement.nextSibling.focus();
+  } else if (e.keyCode === 40) {
+    searchResults.firstChild.focus();
   }
 }
 
@@ -134,7 +139,6 @@ function createListElement(data, index) {
   var listElement = document.createElement('li');
   listElement.className = "listElement";
   listElement.tabIndex = index;
-  listElement.id = index;
   listElement.appendChild(document.createTextNode(data.name));
 
   listElement.addEventListener('click', function() {
